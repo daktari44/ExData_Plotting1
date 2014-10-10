@@ -1,5 +1,6 @@
 ## Exploring Data Analysis: Course Project 1 - Plot 2
 
+
 ## 1. Download and unzip the dataset into the current working directory 
 ## (after testing if the dataset is not already working directory )
 if(!file.exists("household_power_consumption.txt")){
@@ -10,13 +11,14 @@ if(!file.exists("household_power_consumption.txt")){
       rm(datasource) 
 }
 
+
 ## 2. Load required libraries
 library(dplyr)
 library(lubridate)
 
+
 ## 3. Read data into memory - subsetting only the dates required for the analysis
   ## and merging the Date and Time variables into a new datetime variable.
-
 col_types <- c(rep("character", 2), rep("numeric", 7))
 housepower <- read.table("household_power_consumption.txt", sep = ";", na.strings = "?",  
                          header = TRUE, colClasses = col_types)%>%
@@ -24,11 +26,13 @@ housepower <- read.table("household_power_consumption.txt", sep = ";", na.string
       mutate(datetime = dmy_hms(paste(Date, Time)))
       
 
-## 4. Energy submetering by datetime
-png("plot3.png")
+## 4. Plot graph to png device 
+      ## (background set to transparent to match the output in the "figure" folder of the Repo)
+
+png("plot3.png", bg = "transparent")
 with(housepower, {
       plot(rep(datetime, 3), c(Sub_metering_1, Sub_metering_2, Sub_metering_3), type ="n", 
-           xlab = "", ylab = "Energy sub metering", bg = "transparent")
+           xlab = "", ylab = "Energy sub metering")
       lines(datetime, Sub_metering_1, col = "black")
       lines(datetime, Sub_metering_2, col = "red")
       lines(datetime, Sub_metering_3, col = "blue")

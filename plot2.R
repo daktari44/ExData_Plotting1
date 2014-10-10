@@ -21,7 +21,6 @@ library(lubridate)
   ## and merging the Date and Time variables into a new datetime variable.
 
 col_types <- c(rep("character", 2), rep("numeric", 7))
-
 housepower <- read.table("household_power_consumption.txt", sep = ";", na.strings = "?",  
                          header = TRUE, colClasses = col_types)%>%
       filter(Date == "1/2/2007"|Date =="2/2/2007")%>%
@@ -29,10 +28,12 @@ housepower <- read.table("household_power_consumption.txt", sep = ";", na.string
 
 
 
-## 4. Plot Global Active Power by date
-png("plot2.png")
+## 4. Plot required file to png device 
+      ## (background set to transparent to match the output in the "figure" folder of the Repo)
+
+png("plot2.png", bg = "transparent")
 with(housepower, 
       plot(datetime, Global_active_power, type = "l", xlab = "", 
-           ylab="Global Active Power (kilowatts)", bg = "transparent"))
+           ylab="Global Active Power (kilowatts)"))
 dev.off()
 

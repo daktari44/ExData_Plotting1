@@ -16,18 +16,17 @@ library(dplyr)
 
 ## 3. Read data into memory - subsetting only the dates required for the analysis
 col_types <- c(rep("character", 2), rep("numeric", 7))
-
 housepower <- read.table("household_power_consumption.txt", sep = ";", na.strings = "?",  
                          header = TRUE, colClasses = col_types)%>%
       filter(Date == "1/2/2007"|Date =="2/2/2007")
 
 
-## 4. Plot "Global Active Power" histogram
-png("plot1.png")
+## 4. Plot required file to png device 
+    ## (background set to transparent to match the output in the "figure" folder of the Repo)
 
+png("plot1.png", bg = "transparent")
 with(housepower,
       hist(Global_active_power, main = "Global Active Power", 
            xlab = "Global Active Power (kilowatts)", 
-           col = "red", bg = "transparent")) 
- 
+           col = "red")) 
 dev.off()

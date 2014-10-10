@@ -17,7 +17,6 @@ library(lubridate)
 
 ## 3. Read data into memory - subsetting only the dates required for the analysis
   ## and merging the Date and Time variables into a new datetime variable.
-
 col_types <- c(rep("character", 2), rep("numeric", 7))
 housepower <- read.table("household_power_consumption.txt", sep = ";", na.strings = "?",  
                          header = TRUE, colClasses = col_types)%>%
@@ -25,7 +24,9 @@ housepower <- read.table("household_power_consumption.txt", sep = ";", na.string
       mutate(datetime = dmy_hms(paste(Date, Time)))
       
 
-## 4. Plot the required graphs to a png file
+
+## 4. Plot required file to png device 
+      ## (background set to transparent to match the output in the "figure" folder of the Repo)
 
 png("plot4.png")
 par(mfcol = c(2,2), bg = "transparent")
